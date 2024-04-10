@@ -23,9 +23,8 @@ class PredictionPipeline:
         result = np.argmax(model.predict(test_image), axis=1)
         print(result)
 
-        if result[0] == 1:
-            prediction = 'Normal'
-            return [{ "image" : prediction}]
-        else:
-            prediction = 'Adenocarcinoma Cancer'
-            return [{ "image" : prediction}]
+        # Map prediction index to corresponding label
+        prediction_label = 'Normal' if result[0] == 1 else 'Adenocarcinoma Cancer'
+
+        # Return prediction label
+        return [{"image": prediction_label}]
